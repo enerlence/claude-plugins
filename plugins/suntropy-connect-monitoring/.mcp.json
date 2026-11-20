@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "suntropy-connect-monitoring": {
+      "type": "http",
+      "url": "https://connect-gateway.suntropy.ai/monitoring/mcp"
+    }
+  }
+}

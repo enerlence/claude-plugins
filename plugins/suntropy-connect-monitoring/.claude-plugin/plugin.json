@@ -1,0 +1,19 @@
+{
+  "name": "suntropy-connect-monitoring",
+  "displayName": "Suntropy Connect Monitoring",
+  "version": "1.0.0",
+  "description": "Ask Claude about your solar PV plants: real-time status, energy and power curves, devices, alarms and production health, read from all your inverter-monitoring accounts at once and normalised to kW/kWh. Read-only on the plants.",
+  "author": {
+    "name": "Suntropy",
+    "email": "hola@suntropy.ai",
+    "url": "https://suntropy.ai"
+  },
+  "homepage": "https://connect.suntropy.ai",
+  "repository": "https://github.com/enerlence/claude-plugins",
+  "license": "MIT",
+  "keywords": ["solar", "photovoltaic", "inverter", "monitoring", "alarms", "huawei", "sungrow", "goodwe", "fronius", "energy"],
+  "privacyPolicyUrl": "https://suntropy.ai/politica-privacidad/",
+  "documentationUrl": "https://www.suntropy.ai/connect/agentes/",
+  "supportUrl": "mailto:hola@suntropy.ai",
+  "icon": ".claude-plugin/icon.png"
+}

@@ -1,0 +1,13 @@
+{
+  "name": "suntropy",
+  "owner": { "name": "Suntropy", "email": "hola@suntropy.ai", "url": "https://suntropy.ai" },
+  "metadata": { "description": "Suntropy plugins for Claude", "version": "1.0.0" },
+  "plugins": [
+    {
+      "name": "suntropy-connect-monitoring",
+      "source": "./plugins/suntropy-connect-monitoring",
+      "description": "Read your PV plants from every connected inverter-monitoring platform (Huawei, Sungrow, GoodWe, Deye, Solis, Enphase, Growatt, Fronius and more): status, energy, devices and alarms.",
+      "category": "productivity"
+    }
+  ]
+}
