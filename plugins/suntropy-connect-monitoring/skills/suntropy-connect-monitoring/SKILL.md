@@ -32,7 +32,7 @@ The `suntropy-connect-monitoring` MCP server reads the user's PV plants live fro
 | `get_consumption_daily_curve` | Changes in the **shape** of the daily consumption curve (new night or evening load, base load, solar hours). Not for Huawei, Solis or Fronius. |
 | `estimate_consumption_cause` | **Estimated cause** of a consumption change (EV charging, electric heating, air conditioning, always-on load) with confidence and evidence. |
 | `get_pinned_plants` · `set_pinned_plants` ✎ | The plants the user pinned as priorities in Suntropy. Change them only when asked. |
-| `get_connection_catalog` · `create_connection_link` · `create_connection` ✎ | Connect a new manufacturer account (see § Connecting an account). |
+| `get_connection_catalog` · `create_connection_link` ✎ | Connect a new manufacturer account (see § Connecting an account). |
 
 ## Rules that save quota (and time)
 
@@ -96,9 +96,9 @@ Open [diagnosis.md](./diagnosis.md) § Real vs design.
 ## Connecting an account
 
 If the summary or `list_connections` do not show the brand the user expects, it has to be connected.
-- **Prefer `create_connection_link`**: a one-time link (15 minutes) where the user enters the credentials in Suntropy, so they never go through the chat. Sungrow and Enphase return `authorizeUrl` to authorise on the manufacturer's site. Afterwards, check `list_connections`.
+- **Use `create_connection_link`**: a one-time link (15 minutes) that opens Suntropy's Connectors screen with the user's session, where they enter the credentials, so they never go through the chat. Sungrow and Enphase return `authorizeUrl` to authorise on the manufacturer's site. Afterwards, check `list_connections`.
 - `get_connection_catalog` explains what each brand needs (an API account in FusionSolar, a token in Growatt, the paid Solar.web Query API in Fronius, OAuth in Sungrow…).
-- `create_connection` only if the user explicitly prefers to give the values here. Never ask for their Suntropy password, and never repeat a secret back.
+- **Never ask for credentials in the chat** (manufacturer passwords, API keys, tokens, or the Suntropy password). If the user pastes one, do not use or repeat it: give them the link instead.
 - In FusionSolar the plant owner may have to accept "API access" in their app; plants can take a few hours to appear.
 - Accounts can only be removed by the user, in Suntropy (Settings › Suntropy Connect › Connectors).
 
