@@ -1,0 +1,9 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "suntropy-connect-monitoring": {
+      "type": "streamable-http",
+      "url": "https://connect-gateway.suntropy.ai/monitoring/mcp"
+    }
+  }
+}
