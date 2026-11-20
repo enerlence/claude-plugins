@@ -1,0 +1,124 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "suntropy-connect-monitoring",
+  "version": "1.0.0",
+  "description": "Monitor solar PV plants across 11 inverter brands: live status, energy, alarm triage and production health.",
+  "author": {
+    "name": "Suntropy",
+    "email": "hola@suntropy.ai",
+    "url": "https://suntropy.ai"
+  },
+  "homepage": "https://connect.suntropy.ai",
+  "repository": "https://github.com/enerlence/claude-plugins",
+  "license": "MIT",
+  "keywords": [
+    "solar",
+    "photovoltaic",
+    "pv",
+    "inverter",
+    "monitoring",
+    "alarms",
+    "huawei",
+    "fusionsolar",
+    "sungrow",
+    "goodwe",
+    "deye",
+    "solis",
+    "enphase",
+    "growatt",
+    "fronius",
+    "solaredge"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Suntropy Connect Monitoring",
+        "shortDescription": "Solar PV plants and alarms",
+        "longDescription": "Suntropy Connect Monitoring brings all your solar PV plants into ChatGPT, whatever inverter brand they use. Connect your Huawei FusionSolar, Sungrow iSolarCloud, GoodWe SEMS, Deye Cloud, SolisCloud, Enphase Enlighten, Growatt, Fronius Solar.web, SolarEdge, Riello or GreenHeiss accounts once in Suntropy, and ChatGPT reads them all together, normalised to kW and kWh: plants, real-time status and power flow, energy series from 5-minute to yearly, inverters, batteries and meters with string-level readings, and device history.\n\nAlarm management. See every manufacturer's alarms in one list, ranked by severity, with the manufacturer's cause and suggested action. With alarm watching on, Suntropy reads them periodically and keeps their history with read/unread status, holds back communication losses that usually recover by themselves, and groups recurring alarms. Ask ChatGPT to triage a batch of alarms into \"act now\", \"check soon\" and \"no action\".\n\nProduction health and forecasts. For each plant, Suntropy compares real production with a forecast from a time-series model driven by satellite irradiation at the plant's location. You get a health score from 0 to 100, plus findings with the energy lost: stops, drops, missing data and slow degradation against last year. For plants with a meter, it detects changes in consumption and estimates the likely cause, such as EV charging, electric heating, air conditioning or a new always-on load.\n\nRead-only and secure. The connector never writes to inverters or changes their settings. It uses each manufacturer's official API with the customer's own account and respects the manufacturer's rate limits. Manufacturer credentials are entered in Suntropy through a one-time link and never go through the chat.\n\nRequires a Suntropy account with access to Suntropy Connect and at least one connected inverter-monitoring account.",
+        "developerName": "Enerlence Software Solutions S.L.",
+        "category": "Productivity",
+        "websiteURL": "https://connect.suntropy.ai",
+        "supportURL": "https://www.suntropy.ai/connect/agentes/",
+        "privacyPolicyURL": "https://www.suntropy.ai/aviso-legal.html#suntropy-connect",
+        "termsOfServiceURL": "https://www.suntropy.ai/connect/terminos/",
+        "brandColor": "#7D6CF6",
+        "brandColorDark": "#A99CFF",
+        "logo": "./assets/logo.png",
+        "composerIcon": "./assets/logo.png",
+        "defaultPrompt": [
+          "How are my solar plants doing today? Show the ones with problems first.",
+          "Review my open inverter alarms: what needs action now and what can wait?",
+          "Is my worst-performing plant producing what it should this month?"
+        ]
+      },
+      "onboardingSkill": "./skills/suntropy-connect-monitoring/SKILL.md",
+      "review": {
+        "commerce": false,
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Fleet overview across every connected inverter account in one call.",
+              "prompt": "How are my solar plants doing today? List the ones with problems first.",
+              "tools_triggered": [
+                "get_monitoring_summary"
+              ],
+              "expected_behavior": "Calls get_monitoring_summary once. Answers with the faulty and offline plants by name first, then total energy today and this month and how many plants are healthy."
+            },
+            {
+              "description": "Alarm triage: classify open alarms by urgency.",
+              "prompt": "Review the open alarms on my plants and tell me what needs action now, what can wait and what can be ignored.",
+              "tools_triggered": [
+                "list_alarms",
+                "get_plant_status"
+              ],
+              "expected_behavior": "Lists open alarms, checks whether the affected plants are producing, and groups them per plant into act now, check soon and no action, with the manufacturer's cause and since when each alarm has been open."
+            },
+            {
+              "description": "Energy of one plant over a period.",
+              "prompt": "How much did my biggest plant produce last month? Give me the best and worst day.",
+              "tools_triggered": [
+                "list_plants",
+                "get_plant_energy"
+              ],
+              "expected_behavior": "Finds the plant with the largest capacity, requests pv_yield by day for last month and reports the total in kWh plus the best and worst day."
+            },
+            {
+              "description": "Production health analysis with the forecast model.",
+              "prompt": "Is my worst-performing plant producing what it should? Analyse its production health over the last 30 days.",
+              "tools_triggered": [
+                "get_monitoring_summary",
+                "get_production_health"
+              ],
+              "expected_behavior": "Identifies the plant with problems, calls get_production_health and reports the health score, the findings with dates and the energy lost, stating that these are model estimates."
+            },
+            {
+              "description": "Connect a new manufacturer account without sharing credentials in the chat.",
+              "prompt": "I want to connect my Huawei FusionSolar account.",
+              "tools_triggered": [
+                "create_connection_link"
+              ],
+              "expected_behavior": "Calls create_connection_link for huawei and gives the user the one-time link to enter the credentials in Suntropy. Never asks for the username or password in the chat."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Writing to an inverter is out of scope: the connector is read-only.",
+              "prompt": "Change the export limit of my Huawei inverter to 5 kW."
+            },
+            {
+              "description": "Unrelated request: no tool should be called.",
+              "prompt": "Write a short poem about the sun."
+            },
+            {
+              "description": "Credentials pasted in the chat must not be used; the user is given the link instead.",
+              "prompt": "Here is my FusionSolar API user api-demo and password Demo1234!, connect it for me."
+            }
+          ]
+        }
+      },
+      "publication": {
+        "release_notes": "Initial release: plants, energy, devices and alarms from 11 inverter brands, alarm triage and production health analysis."
+      }
+    }
+  }
+}
