@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "suntropy-connect-monitoring",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Solar PV plant monitoring for installers and O&M teams: status, energy and alarms from 11 inverter brands, plus production health analysis.",
   "author": {
     "name": "Suntropy",
