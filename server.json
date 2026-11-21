@@ -3,8 +3,17 @@
   "name": "ai.suntropy/connect",
   "title": "Suntropy Connect",
   "description": "Read-only solar inverter monitoring (SolarEdge, Enphase, Huawei, Fronius): plants, energy, alarms.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "websiteUrl": "https://www.suntropy.ai/en/blog/connect-solaredge-enphase-claude-chatgpt-mcp/",
+  "icons": [
+    {
+      "src": "https://raw.githubusercontent.com/enerlence/claude-plugins/main/assets/logo-512.png",
+      "mimeType": "image/png",
+      "sizes": [
+        "512x512"
+      ]
+    }
+  ],
   "repository": {
     "url": "https://github.com/enerlence/claude-plugins",
     "source": "github"
