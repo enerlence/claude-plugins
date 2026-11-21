@@ -1,5 +1,7 @@
 # Suntropy plugins for Claude
 
+[![mcptry](https://mcptry.com/badge/ai.suntropy/connect)](https://mcptry.com/servers/ai.suntropy/connect)
+
 Claude plugins from [Suntropy](https://suntropy.ai), the AI software for solar installers.
 
 | Plugin | What it does |
