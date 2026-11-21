@@ -59,44 +59,31 @@
             {
               "description": "Fleet overview across every connected inverter account in one call.",
               "prompt": "How are my solar plants doing today? List the ones with problems first.",
-              "tools_triggered": [
-                "get_monitoring_summary"
-              ],
+              "tools_triggered": "get_monitoring_summary",
               "expected_behavior": "Calls get_monitoring_summary once. Answers with the faulty and offline plants by name first, then total energy today and this month and how many plants are healthy."
             },
             {
               "description": "Alarm triage: classify open alarms by urgency.",
               "prompt": "Review the open alarms on my plants and tell me what needs action now, what can wait and what can be ignored.",
-              "tools_triggered": [
-                "list_alarms",
-                "get_plant_status"
-              ],
+              "tools_triggered": "list_alarms, get_plant_status",
               "expected_behavior": "Lists open alarms, checks whether the affected plants are producing, and groups them per plant into act now, check soon and no action, with the manufacturer's cause and since when each alarm has been open."
             },
             {
               "description": "Energy of one plant over a period.",
               "prompt": "How much did my biggest plant produce last month? Give me the best and worst day.",
-              "tools_triggered": [
-                "list_plants",
-                "get_plant_energy"
-              ],
+              "tools_triggered": "list_plants, get_plant_energy",
               "expected_behavior": "Finds the plant with the largest capacity, requests pv_yield by day for last month and reports the total in kWh plus the best and worst day."
             },
             {
               "description": "Production health analysis with the forecast model.",
               "prompt": "Is my worst-performing plant producing what it should? Analyse its production health over the last 30 days.",
-              "tools_triggered": [
-                "get_monitoring_summary",
-                "get_production_health"
-              ],
+              "tools_triggered": "get_monitoring_summary, get_production_health",
               "expected_behavior": "Identifies the plant with problems, calls get_production_health and reports the health score, the findings with dates and the energy lost, stating that these are model estimates."
             },
             {
               "description": "Connect a new manufacturer account without sharing credentials in the chat.",
               "prompt": "I want to connect my Huawei FusionSolar account.",
-              "tools_triggered": [
-                "create_connection_link"
-              ],
+              "tools_triggered": "create_connection_link",
               "expected_behavior": "Calls create_connection_link for huawei and gives the user the one-time link to enter the credentials in Suntropy. Never asks for the username or password in the chat."
             }
           ],
