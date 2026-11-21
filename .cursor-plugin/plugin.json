@@ -1,0 +1,41 @@
+{
+  "name": "suntropy-connect-monitoring",
+  "displayName": "Suntropy Connect Monitoring",
+  "version": "1.0.0",
+  "description": "Ask your AI assistant about your solar PV plants: live status, energy, devices, alarms, production health and sales opportunities, read from 11 inverter brands at once (Huawei, Sungrow, GoodWe, Deye, Solis, Enphase, Growatt, Fronius, SolarEdge, Riello, GreenHeiss). Read-only on the plants; OAuth sign-in.",
+  "author": {
+    "name": "Suntropy",
+    "email": "hola@suntropy.ai",
+    "url": "https://suntropy.ai"
+  },
+  "homepage": "https://connect.suntropy.ai",
+  "repository": "https://github.com/enerlence/claude-plugins",
+  "license": "MIT",
+  "keywords": [
+    "solar",
+    "photovoltaic",
+    "pv",
+    "inverter",
+    "monitoring",
+    "alarms",
+    "mcp",
+    "huawei",
+    "fusionsolar",
+    "sungrow",
+    "goodwe",
+    "deye",
+    "solis",
+    "enphase",
+    "growatt",
+    "fronius",
+    "solaredge"
+  ],
+  "logo": "assets/logo-512.png",
+  "mcpServers": {
+    "suntropy-connect-monitoring": {
+      "type": "http",
+      "url": "https://connect-gateway.suntropy.ai/monitoring/mcp"
+    }
+  },
+  "skills": "./plugins/suntropy-connect-monitoring/skills/"
+}
